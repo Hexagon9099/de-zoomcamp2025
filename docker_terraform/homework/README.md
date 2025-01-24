@@ -4,9 +4,11 @@ $ docker run -it --entrypoint=bash python:3.12.8 \
 $ pip --version \
 pip 24.3.1 
 
+
 # Q2 Given the following docker-compose.yaml, what is the hostname and port that pgadmin should use to connect to the postgres database?
 
 db:5432
+
 
 # Q3 During the period of October 1st 2019 (inclusive) and November 1st 2019 (exclusive), how many trips, respectively, happened:
 Up to 1 mile \
@@ -27,3 +29,13 @@ SELECT \
 FROM taxi_trips_10_2019 \
 GROUP BY distance_range \
 ORDER BY distance_range
+
+
+#Q4 Which was the pick up day with the longest trip distance? Use the pick up time for your calculations.
+
+SELECT \
+	CAST (lpep_pickup_datetime AS DATE) AS day, \
+	MAX (trip_distance) AS distance \
+FROM taxi_trips_10_2019 \
+GROUP BY day \
+ORDER BY distance DESC \
