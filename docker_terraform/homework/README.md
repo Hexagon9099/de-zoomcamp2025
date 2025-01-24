@@ -16,15 +16,15 @@ $ docker-compose up -d #using docker-compose.yaml file
 # In between 3 (exclusive) and 7 miles (inclusive),
 # In between 7 (exclusive) and 10 miles (inclusive),
 # Over 10 miles
-SELECT
-	CASE
-		WHEN trip_distance <=1 THEN '(1) up to 1 mile'
-		WHEN trip_distance >1 AND trip_distance <=3 THEN '(2) 1-3 miles'
-		WHEN trip_distance >3 AND trip_distance <=7 THEN '(3) 3-7 miles'
-		WHEN trip_distance >7 AND trip_distance <=10 THEN '(4) 7-10 miles'
-		WHEN trip_distance >10 THEN '(5) over 10 miles'
-	END AS distance_range,
-	COUNT (1) AS trips
-FROM taxi_trips_10_2019
-GROUP BY distance_range
+SELECT \
+	CASE \
+		WHEN trip_distance <=1 THEN '(1) up to 1 mile' \
+		WHEN trip_distance >1 AND trip_distance <=3 THEN '(2) 1-3 miles' \
+		WHEN trip_distance >3 AND trip_distance <=7 THEN '(3) 3-7 miles' \
+		WHEN trip_distance >7 AND trip_distance <=10 THEN '(4) 7-10 miles' \
+		WHEN trip_distance >10 THEN '(5) over 10 miles' \
+	END AS distance_range, \
+	COUNT (1) AS trips \
+FROM taxi_trips_10_2019 \
+GROUP BY distance_range \
 ORDER BY distance_range
