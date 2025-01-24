@@ -31,7 +31,7 @@ GROUP BY distance_range \
 ORDER BY distance_range
 
 
-#Q4 Which was the pick up day with the longest trip distance? Use the pick up time for your calculations.
+# Q4 Which was the pick up day with the longest trip distance? Use the pick up time for your calculations.
 
 SELECT \
 	CAST (lpep_pickup_datetime AS DATE) AS day, \
