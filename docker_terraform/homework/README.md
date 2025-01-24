@@ -3,3 +3,7 @@
 $ docker run -it --entrypoint=bash python:3.12.8 \
 $ pip --version \
 pip 24.3.1 
+
+# Q2 Given the following docker-compose.yaml, what is the hostname and port that pgadmin should use to connect to the postgres database?
+
+db:5432
