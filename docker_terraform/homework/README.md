@@ -40,6 +40,7 @@ FROM taxi_trips_10_2019 \
 GROUP BY day \
 ORDER BY distance DESC \
 
+
 # Q5 Which were the top pickup locations with over 13,000 in total_amount (across all trips) for 2019-10-18?
 
 SELECT \
@@ -52,3 +53,19 @@ WHERE CAST (lpep_pickup_datetime AS DATE) = '2019-10-18' \
 GROUP BY z."Zone", CAST (lpep_pickup_datetime AS DATE) \
 ORDER BY sum DESC \
 LIMIT 100
+
+
+# Q6 For the passengers picked up in October 2019 in the zone named "East Harlem North" which was the drop off zone that had the largest tip?
+
+SELECT 
+	z_dropoff."Zone" AS dropoff_zone,
+	MAX (t.tip_amount) tip
+FROM taxi_trips_10_2019 t
+JOIN zones_homework z_pickup ON t."PULocationID" = z_pickup."LocationID"
+JOIN zones_homework z_dropoff ON t."DOLocationID" = z_dropoff."LocationID"
+WHERE
+	CAST(t.lpep_pickup_datetime AS DATE) BETWEEN '2019-10-01' AND '2019-10-31'
+	AND z_pickup."Zone"='East Harlem North'
+GROUP BY z_dropoff."Zone"
+ORDER BY tip DESC
+LIMIT 1
