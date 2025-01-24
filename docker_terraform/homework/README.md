@@ -11,11 +11,12 @@ db:5432
 # Q3 Prepare Postgres
 $ docker-compose up -d #using docker-compose.yaml file
 # During the period of October 1st 2019 (inclusive) and November 1st 2019 (exclusive), how many trips, respectively, happened:
-# Up to 1 mile 
-# In between 1 (exclusive) and 3 miles (inclusive),
-# In between 3 (exclusive) and 7 miles (inclusive),
-# In between 7 (exclusive) and 10 miles (inclusive),
-# Over 10 miles
+Up to 1 mile \
+In between 1 (exclusive) and 3 miles (inclusive), \
+In between 3 (exclusive) and 7 miles (inclusive), \
+In between 7 (exclusive) and 10 miles (inclusive), \
+Over 10 miles \
+
 SELECT \
 	CASE \
 		WHEN trip_distance <=1 THEN '(1) up to 1 mile' \
