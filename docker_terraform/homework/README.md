@@ -39,3 +39,16 @@ SELECT \
 FROM taxi_trips_10_2019 \
 GROUP BY day \
 ORDER BY distance DESC \
+
+# Q5 Which were the top pickup locations with over 13,000 in total_amount (across all trips) for 2019-10-18?
+
+SELECT \
+	CAST (lpep_pickup_datetime AS DATE) AS day, \
+	SUM (total_amount) AS sum, \
+	z."Zone" \
+FROM taxi_trips_10_2019 t \
+JOIN zones_homework z ON t."PULocationID" = z."LocationID" \
+WHERE CAST (lpep_pickup_datetime AS DATE) = '2019-10-18' \
+GROUP BY z."Zone", CAST (lpep_pickup_datetime AS DATE) \
+ORDER BY sum DESC \
+LIMIT 100
