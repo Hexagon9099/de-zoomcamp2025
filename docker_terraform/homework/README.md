@@ -15,7 +15,7 @@ Up to 1 mile \
 In between 1 (exclusive) and 3 miles (inclusive), \
 In between 3 (exclusive) and 7 miles (inclusive), \
 In between 7 (exclusive) and 10 miles (inclusive), \
-Over 10 miles \
+Over 10 miles 
 
 SELECT \
 	CASE \
