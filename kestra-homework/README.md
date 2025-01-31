@@ -24,7 +24,7 @@ inputs: \
     defaults: "01" 
 
 variables: \
-  file: "{{inputs.taxi}}_tripdata_{{inputs.year}}-{{inputs.month}}.csv" # here is the answer, depended on inputs \
+  file: "{{inputs.taxi}}_tripdata_{{inputs.year}}-{{inputs.month}}.csv" \
   staging_table: "public.{{inputs.taxi}}_tripdata_staging" \
   table: "public.{{inputs.taxi}}_tripdata" \
   data: "{{outputs.extract.outputFiles[inputs.taxi ~ '_tripdata_' ~ inputs.year ~ '-' ~ inputs.month ~ '.csv']}}" 
