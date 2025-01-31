@@ -33,10 +33,21 @@ variables: \
 
 # Q3. How many rows are there for the Yellow Taxi data for all CSV files in the year 2020?
 execute 'gcp ETL pipeline scheduled' using triggers first, to backfill data for 2020 year. \
-then, in BigQuery \
+then, in BigQuery 
+
 SELECT COUNT (*) AS row_count \
  FROM `kestra-sandbox-449315.de_zoomcamp.yellow_tripdata` \
  WHERE EXTRACT(YEAR FROM tpep_pickup_datetime) = 2020
+
+to check if there are NULL values in both pickup and dropoff columns run
+
+SELECT COUNT(*) AS row_count \
+FROM `kestra-sandbox-449315.de_zoomcamp.yellow_tripdata` \
+WHERE \
+  EXTRACT(YEAR FROM tpep_pickup_datetime) = 2020 \
+  OR EXTRACT(YEAR FROM tpep_dropoff_datetime) = 2020\
+  OR (tpep_pickup_datetime IS NULL AND tpep_dropoff_datetime IS NOT NULL AND EXTRACT(YEAR FROM tpep_dropoff_datetime) = 2020) \
+  OR (tpep_dropoff_datetime IS NULL AND tpep_pickup_datetime IS NOT NULL AND EXTRACT(YEAR FROM tpep_pickup_datetime) = 2020) 
 
  the answer is 24,648,499
 
