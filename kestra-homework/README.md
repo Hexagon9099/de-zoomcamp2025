@@ -72,5 +72,17 @@ FROM yellow_tripdata_staging
 
 the answer is 1,925,152
 
+# Q6 How would you configure the timezone to New York in a Schedule trigger?
+a kestra task should like like this 
+
+triggers: \
+  - id: green_schedule \
+    type: io.kestra.plugin.core.trigger.Schedule \
+    cron: "0 9 1 * *" \
+    timezone: "America/New_York" \ 
+    inputs: \
+      taxi: green \
+
+the answer is 'Add a timezone property set to America/New_York in the Schedule trigger configuration'
 
 
