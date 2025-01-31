@@ -30,3 +30,13 @@ variables: \
   data: "{{outputs.extract.outputFiles[inputs.taxi ~ '_tripdata_' ~ inputs.year ~ '-' ~ inputs.month ~ '.csv']}}" 
 
   the answer is green_tripdata_2020-04.csv
+
+# Q3. How many rows are there for the Yellow Taxi data for all CSV files in the year 2020?
+execute 'gcp ETL pipeline scheduled' using triggers first, to backfill data for 2020 year. \
+then, in BigQuery \
+SELECT COUNT (*) AS row_count \
+ FROM `kestra-sandbox-449315.de_zoomcamp.yellow_tripdata` \
+ WHERE EXTRACT(YEAR FROM tpep_pickup_datetime) = 2020
+
+ the answer is 24,648,499
+
