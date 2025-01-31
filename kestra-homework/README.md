@@ -62,5 +62,15 @@ SELECT COUNT (*) AS row_count \
 
  the answer is 1,734,051
 
+ # Q5 How many rows are there for the Yellow Taxi data for the March 2021 CSV file?
+ For fun, I run ETL postgres pipeline (workflow is in the folder), specifying year 2021 and month 03 as inputs. \ 
+ since the workflow doesn't impy removing a staging table, we can count rows in it. \
+ using pgAdmin
+
+ SELECT COUNT (*) \
+FROM yellow_tripdata_staging
+
+the answer is 1,925,152
+
 
 
