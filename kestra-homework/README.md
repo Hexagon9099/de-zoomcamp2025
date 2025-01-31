@@ -3,3 +3,30 @@ execute ETL pipeline workflows first, attached in the current folder. \
 then go to the gcp bucket, find required file and look in its details. \
 128.3 MB
 
+# Q2. What is the rendered value of the variable file when the inputs taxi is set to green, year is set to 2020, and month is set to 04 during execution?
+inputs: \
+  - id: taxi \
+    type: SELECT \
+    displayName: Select taxi type \
+    values: ['yellow', 'green'] \
+    defaults: 'yellow' \
+
+  - id: year \
+    type: SELECT \
+    displayName: Select year \
+    values: ["2019", "2020"] \
+    defaults: "2019" \
+
+  - id: month \
+    type: SELECT \
+    displayName: Select month \
+    values: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"] \
+    defaults: "01" \
+
+variables: \
+  file: "{{inputs.taxi}}_tripdata_{{inputs.year}}-{{inputs.month}}.csv" \ # here is the answer, depended on inputs
+  staging_table: "public.{{inputs.taxi}}_tripdata_staging" \
+  table: "public.{{inputs.taxi}}_tripdata" \
+  data: "{{outputs.extract.outputFiles[inputs.taxi ~ '_tripdata_' ~ inputs.year ~ '-' ~ inputs.month ~ '.csv']}}" \
+
+  the answer is green_tripdata_2020-04.csv
