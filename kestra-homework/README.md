@@ -51,3 +51,16 @@ WHERE \
 
  the answer is 24,648,499
 
+ # Q4 How many rows are there for the Green Taxi data for all CSV files in the year 2020?
+ similarly to Q3, \
+ execute 'gcp ETL pipeline scheduled' using triggers first, to backfill data for 2020 year. \
+then, in BigQuery
+
+SELECT COUNT (*) AS row_count \ 
+ FROM `kestra-sandbox-449315.de_zoomcamp.green_tripdata` \
+ WHERE EXTRACT(YEAR FROM lpep_pickup_datetime) = 2020
+
+ the answer is 1,734,051
+
+
+
