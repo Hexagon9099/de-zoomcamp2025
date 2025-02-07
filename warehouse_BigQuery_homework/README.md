@@ -78,4 +78,23 @@ WHERE DATE (tpep_dropoff_datetime) BETWEEN '2024-03-01' AND '2024-03-15';
 Answer: 310.24 MB for non-partitioned table and 26.84 MB for the partitioned table
 
 
+# Q7. Where is the data stored in the External Table you created?
 
+Look at the query in "Preparation 1" section.
+
+Answer: GCP Bucket
+
+
+# Q8. It is best practice in Big Query to always cluster your data:
+
+False, because it isn't efficient for small tables.
+
+Answer: False
+
+
+# Q9. No Points: Write a SELECT count(*) query FROM the materialized table you created. How many bytes does it estimate will be read? Why?
+
+SELECT COUNT (*) \
+FROM `kestra-sandbox-449315.de_zoomcamp.yellow_tripdata_2024_hw3`;
+
+The query will process 0B of data. Because the results were cached already in the previous queries (?)
