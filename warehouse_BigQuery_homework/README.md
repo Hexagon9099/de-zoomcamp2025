@@ -97,4 +97,4 @@ Answer: False
 SELECT COUNT (*) \
 FROM `kestra-sandbox-449315.de_zoomcamp.yellow_tripdata_2024_hw3`;
 
-The query will process 0B of data. Because the results were cached already in the previous queries (?)
+The query will process 0B of data. Because the results were cached already in the previous query from Q1.
