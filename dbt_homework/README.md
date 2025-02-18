@@ -10,4 +10,8 @@ Answer: select * from myproject.my_nyc_tripdata.ext_green_taxi
 Answer: Update the WHERE clause to pickup_datetime >= CURRENT_DATE - INTERVAL '{{ var("days_back", env_var("DAYS_BACK", "30")) }}' DAY'
 
 
+# Q3. Select the option that does NOT apply for materializing fct_taxi_monthly_zone_revenue
+
+Answer: dbt run --select models/staging/+
+
 
