@@ -18,10 +18,10 @@ Answer: dbt run --select models/staging/+
 # Q4. Regarding macro, select all statements that are true to the models using it:
 {% macro resolve_schema_for(model_type) -%} 
 
-    {%- set target_env_var = 'DBT_BIGQUERY_TARGET_DATASET'  -%} \
+    {%- set target_env_var = 'DBT_BIGQUERY_TARGET_DATASET'  -%} 
     {%- set stging_env_var = 'DBT_BIGQUERY_STAGING_DATASET' -%}
 
-    {%- if model_type == 'core' -%} {{- env_var(target_env_var) -}} \
+    {%- if model_type == 'core' -%} {{- env_var(target_env_var) -}} 
     {%- else -%}                    {{- env_var(stging_env_var, env_var(target_env_var)) -}}
     {%- endif -%}
 
@@ -33,7 +33,7 @@ Use as \
 ) }}
 
 Answers:
-1) Setting a value for DBT_BIGQUERY_TARGET_DATASET env var is mandatory, or it'll fail to compile \
+1) Setting a value for DBT_BIGQUERY_TARGET_DATASET env var is mandatory, or it'll fail to compile 
 2) When using core, it materializes in the dataset defined in DBT_BIGQUERY_TARGET_DATASET
 3) When using stg, it materializes in the dataset defined in DBT_BIGQUERY_STAGING_DATASET, or defaults to DBT_BIGQUERY_TARGET_DATASET
 4) When using staging, it materializes in the dataset defined in DBT_BIGQUERY_STAGING_DATASET, or defaults to DBT_BIGQUERY_TARGET_DATASET
