@@ -43,6 +43,7 @@ The solution is in a dbt model named _fct_taxi_trips_quarterly_revenue.sql_ and 
 
 Answer: green: {best: 2020/Q1, worst: 2020/Q2}, yellow: {best: 2020/Q1, worst: 2020/Q2}
 
+
 # Q6. What are the values of p97, p95, p90 for Green Taxi and Yellow Taxi, in April 2020?
 The solution is in a dbt model named _fct_taxi_trips_monthly_fare_p95.sql_ and attached in this directory in a dbt project.
 
@@ -61,4 +62,10 @@ WHERE year = 2020 \
 ORDER BY service_type; 
 
 Answer: green: {p97: 55.0, p95: 45.0, p90: 26.5}, yellow: {p97: 31.5, p95: 25.5, p90: 19.0}
+
+
+# Q7. For the Trips that respectively started from Newark Airport, SoHo, and Yorkville East, in November 2019, what are dropoff_zones with the 2nd longest p90 trip_duration ?
+The solution is in a dbt model named _fct_fhv_monthly_zone_traveltime_p90.sql_ and attached in this directory in a dbt project.
+
+Answer: LaGuardia Airport, Chinatown, Garment District
 
