@@ -39,8 +39,26 @@ Answers:
 4) When using staging, it materializes in the dataset defined in DBT_BIGQUERY_STAGING_DATASET, or defaults to DBT_BIGQUERY_TARGET_DATASET
 
 # Q5. Considering the YoY Growth in 2020, which were the yearly quarters with the best (or less worse) and worst results for green, and yellow
-
 The solution is in a dbt model named _fct_taxi_trips_quarterly_revenue.sql_ and attached in this directory in a dbt project.
 
 Answer: green: {best: 2020/Q1, worst: 2020/Q2}, yellow: {best: 2020/Q1, worst: 2020/Q2}
+
+# Q6. What are the values of p97, p95, p90 for Green Taxi and Yellow Taxi, in April 2020?
+The solution is in a dbt model named _fct_taxi_trips_monthly_fare_p95.sql_ and attached in this directory in a dbt project.
+
+This query is just a check from fact_trips table, the code is run by the mentioned model.
+
+{ SELECT 
+  service_type, 
+  APPROX_QUANTILES(fare_amount, 100)[OFFSET(97)] AS p97, 
+  APPROX_QUANTILES(fare_amount, 100)[OFFSET(95)] AS p95, 
+  APPROX_QUANTILES(fare_amount, 100)[OFFSET(90)] AS p90 
+FROM `de_zoomcamp.fact_trips` 
+WHERE year = 2020
+  AND month = 4
+  AND fare_amount > 0
+  GROUP BY service_type
+ORDER BY service_type; }
+
+Answer: 
 
