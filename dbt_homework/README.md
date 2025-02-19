@@ -48,7 +48,7 @@ The solution is in a dbt model named _fct_taxi_trips_monthly_fare_p95.sql_ and a
 
 This query is just a check from fact_trips table, the code is run by the mentioned model.
 
-{ SELECT 
+{{ SELECT 
   service_type, 
   APPROX_QUANTILES(fare_amount, 100)[OFFSET(97)] AS p97, 
   APPROX_QUANTILES(fare_amount, 100)[OFFSET(95)] AS p95, 
@@ -58,7 +58,7 @@ WHERE year = 2020
   AND month = 4
   AND fare_amount > 0
   GROUP BY service_type
-ORDER BY service_type; }
+ORDER BY service_type; }}
 
 Answer: 
 
