@@ -11,9 +11,47 @@ yellow_tripdata as (
     from {{ ref('stg_yellow_tripdata') }}
 ),
 trips_unioned as (
-    select * from green_tripdata
+    select *,
+    EXTRACT(YEAR FROM pickup_datetime) AS year,
+    EXTRACT(MONTH FROM pickup_datetime) AS month,
+    CASE
+        WHEN EXTRACT(MONTH FROM pickup_datetime) IN (1,2,3) THEN 1
+        WHEN EXTRACT(MONTH FROM pickup_datetime) IN (4,5,6) THEN 2
+        WHEN EXTRACT(MONTH FROM pickup_datetime) IN (7,8,9) THEN 3
+        WHEN EXTRACT(MONTH FROM pickup_datetime) IN (10,11,12) THEN 4
+    END AS quarter,
+    CONCAT(
+         CAST (EXTRACT(YEAR FROM pickup_datetime) AS STRING),
+        '/Q',
+        CAST(CASE
+                WHEN EXTRACT(MONTH FROM pickup_datetime) IN (1,2,3) THEN 1
+                WHEN EXTRACT(MONTH FROM pickup_datetime) IN (4,5,6) THEN 2
+                WHEN EXTRACT(MONTH FROM pickup_datetime) IN (7,8,9) THEN 3
+                WHEN EXTRACT(MONTH FROM pickup_datetime) IN (10,11,12) THEN 4
+            END AS STRING)
+    )AS year_quarter
+    from green_tripdata
     union all
-    select * from yellow_tripdata
+    select *,
+    EXTRACT(YEAR FROM pickup_datetime) AS year,
+    EXTRACT(MONTH FROM pickup_datetime) AS month,
+    CASE
+        WHEN EXTRACT(MONTH FROM pickup_datetime) IN (1,2,3) THEN 1
+        WHEN EXTRACT(MONTH FROM pickup_datetime) IN (4,5,6) THEN 2
+        WHEN EXTRACT(MONTH FROM pickup_datetime) IN (7,8,9) THEN 3
+        WHEN EXTRACT(MONTH FROM pickup_datetime) IN (10,11,12) THEN 4
+    END AS quarter,
+    CONCAT(
+         CAST (EXTRACT(YEAR FROM pickup_datetime) AS STRING),
+        '/Q',
+        CAST(CASE
+                WHEN EXTRACT(MONTH FROM pickup_datetime) IN (1,2,3) THEN 1
+                WHEN EXTRACT(MONTH FROM pickup_datetime) IN (4,5,6) THEN 2
+                WHEN EXTRACT(MONTH FROM pickup_datetime) IN (7,8,9) THEN 3
+                WHEN EXTRACT(MONTH FROM pickup_datetime) IN (10,11,12) THEN 4
+            END AS STRING)
+    )AS year_quarter
+    from yellow_tripdata
 ),
 dim_zones as (
     select * from {{ ref('dim_zones') }}
@@ -44,9 +82,14 @@ select trips_unioned.tripid,
     trips_unioned.improvement_surcharge, 
     trips_unioned.total_amount, 
     trips_unioned.payment_type, 
-    trips_unioned.payment_type_description
+    trips_unioned.payment_type_description,
+    trips_unioned.year,
+    trips_unioned.month,
+    trips_unioned.quarter,
+    trips_unioned.year_quarter
 from trips_unioned
 inner join dim_zones as pickup_zone
 on trips_unioned.pickup_locationid = pickup_zone.locationid
 inner join dim_zones as dropoff_zone
 on trips_unioned.dropoff_locationid = dropoff_zone.locationid
+

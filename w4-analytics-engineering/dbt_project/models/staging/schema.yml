@@ -8,6 +8,7 @@ sources:
     tables: 
       - name: green_tripdata
       - name: yellow_tripdata
+      - name: fhv_tripdata
 
 models:
   - name: stg_yellow_tripdata
@@ -201,5 +202,44 @@ models:
         description: ""
 
       - name: payment_type_description
+        data_type: string
+        description: ""
+
+  - name: stg_fhv_tripdata
+    description: ""
+    columns:
+      - name: unique_row_id
+        data_type: bytes
+        description: ""
+
+      - name: filename
+        data_type: string
+        description: ""
+
+      - name: dispatching_base_num
+        data_type: string
+        description: ""
+
+      - name: pickup_datetime
+        data_type: timestamp
+        description: ""
+
+      - name: dropOff_datetime
+        data_type: timestamp
+        description: ""
+
+      - name: PUlocationID
+        data_type: integer
+        description: ""
+
+      - name: DOlocationID
+        data_type: integer
+        description: ""
+
+      - name: SR_Flag
+        data_type: integer
+        description: ""
+
+      - name: Affiliated_base_number
         data_type: string
         description: ""
