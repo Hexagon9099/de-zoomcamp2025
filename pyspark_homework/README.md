@@ -21,3 +21,23 @@ The solution is in the attached .ipynb file. I read, casted column types and wro
 $ ls -lh data/pq/yellow/2024/10/
 
 Answer: 25MB
+
+
+
+# Q3. How many taxi trips were there on the 15th of October?
+
+The full solution is in an attached file.
+
+df_pq = spark.sql(""" \
+SELECT \
+    COUNT (*) AS num_trips, \
+    CAST(pickup_datetime AS DATE) AS date \
+FROM yellow_tripdata_1024 \
+WHERE pickup_datetime >= '2024-10-15' \
+    AND pickup_datetime < '2024-10-16' \
+GROUP BY date \
+""")
+
+df_pq.show()
+
+Answer: 125,567
