@@ -41,3 +41,31 @@ GROUP BY date \
 df_pq.show()
 
 Answer: 125,567
+
+
+
+# Q4. What is the length of the longest trip in the dataset in hours?
+
+df_pq = spark.sql(""" \
+SELECT \
+   pickup_datetime, \
+   dropoff_datetime, \
+   ROUND ((UNIX_TIMESTAMP(dropoff_datetime) - UNIX_TIMESTAMP(pickup_datetime)) / 3600, 2) AS time_diff_hours \
+FROM yellow_tripdata_1024 \
+ORDER BY time_diff_hours DESC \
+LIMIT 3 \
+""")
+
+df_pq.show()
+
+
+Answer: 162
+
+
+
+# Q5. Spark’s User Interface which shows the application's dashboard runs on which local port?
+
+Answer: 4040
+
+
+
