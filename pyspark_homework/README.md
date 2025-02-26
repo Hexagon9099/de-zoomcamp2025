@@ -69,3 +69,22 @@ Answer: 4040
 
 
 
+# Q6. What is the name of the LEAST frequent pickup location Zone?
+Full solution is in the attached file, where I joined both tables before executing a query. SQL query:
+
+df_join = spark.sql(""" \
+SELECT \
+    COUNT (*) AS num_trips, \
+    PULocationID, \
+    Zone \
+FROM trips_zones \
+GROUP BY 2,3 \
+ORDER BY 1 \
+""") \
+df_join.show(truncate=False)
+
+
+Answer: Governor's Island/Ellis Island/Liberty Island
+
+
+
